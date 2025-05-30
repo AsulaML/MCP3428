@@ -6,7 +6,7 @@ struct MCP3428 ExtAdc;
 
 /**
  * \fn void MCP3428_Init()
- * \brief fonction qui permet d'initialiser l'adc
+ * \brief Initialise l'ADC MCP3428 avec les paramètres par défaut.
  * \return 0
  */
 void MCP3428_Init()
@@ -21,7 +21,7 @@ void MCP3428_Init()
 
 /**
  * \fn void MCP3428_Read_All_CH_ConvertToVoltage()
- * \brief fonction qui permet de lires toutes les tensions d'entr�es
+ * \brief Lit tous les canaux ADC et convertit les valeurs brutes en tensions (mV).
  * \return 0
  */
 void MCP3428_Read_All_CH_ConvertToVoltage()
@@ -36,9 +36,11 @@ void MCP3428_Read_All_CH_ConvertToVoltage()
 
 /**
  * \fn float MCP3428_ConvertRawToVoltage(int16_t RawVal, uint8_t gain)
- * \brief fonction qui permet de convertir un int16_t en valeur de tension
+ * \brief Convertit une valeur brute en tension (mV) selon le gain appliqué.
  * selon le gain que l'on applique au cannal
- * \return float
+ * @param RawVal Valeur brute ADC.
+ * @param gain Gain appliqué (G1, G2, G4, G8).
+ * \return Tension convertie en millivolts.
  */
 float MCP3428_ConvertRawToVoltage(int16_t RawVal, uint8_t gain)
 {
@@ -52,7 +54,7 @@ float MCP3428_ConvertRawToVoltage(int16_t RawVal, uint8_t gain)
 
 /**
  * \fn void MCP3428_Read_All_CH()
- * \brief fonction qui permet toutes les channels et de la l'ajouter � la structure
+ * \brief Lit les valeurs brutes de tous les canaux ADC.
  * \return 0
  */
 void MCP3428_Read_All_CH()
@@ -65,7 +67,9 @@ void MCP3428_Read_All_CH()
 
 /**
  * \fn void MCP3428_Read_CH(uint8_t ch)
- * \brief fonction qui permet le lire la donn�e d'un channel et de la placer dans la structure
+ * \brief Lit la donnée d'un canal donné et la stocke dans la structure.
+ * @param ch Canal à lire (0 à 3).
+ * @param gain Gain à appliquer.
  * \return 0
  */
 void MCP3428_Read_CH(uint8_t ch, uint8_t gain)
@@ -77,7 +81,9 @@ void MCP3428_Read_CH(uint8_t ch, uint8_t gain)
 
 /**
  * \fn void MCP3428_Select_Channel_With_Gain(uint8_t ch)
- * \brief fonction qui permet s�lectionner le cannal de mesure
+ * \brief Sélectionne un canal et un gain, met à jour la config du MCP3428.
+ * @param ch Canal sélectionné.
+ * @param gain Gain appliqué.
  * \return 0
  */
 void MCP3428_Select_Channel_With_Gain(uint8_t ch, uint8_t gain)
@@ -90,9 +96,8 @@ void MCP3428_Select_Channel_With_Gain(uint8_t ch, uint8_t gain)
 
 /**
  * \fn uint8_t MCP3428_ConfigByte_Format()
- * \brief fonction qui permet formater le byte de config selon les valeurs de la 
- * structure
- * \return le config byte
+ * \brief Génère l'octet de configuration selon les paramètres de la structure.
+ * @return Byte de configuration.
  */
 uint8_t MCP3428_ConfigByte_Format()
 {
@@ -108,8 +113,10 @@ uint8_t MCP3428_ConfigByte_Format()
 
 /**
  * \fn void MCP3428_W_REG(uint8_t SlaveAdr, uint8_t RegVal)
- * \brief fonction qui permet d'�crire dans le registre de config
- * \return 0
+ * @brief Écrit un registre sur le MCP3428 via I2C.
+ * @param SlaveAdr Adresse I2C du MCP3428.
+ * @param RegVal Valeur du registre à écrire.
+ * \return void
  */
 void MCP3428_W_REG(uint8_t SlaveAdr, uint8_t RegVal)
 {
@@ -123,8 +130,9 @@ void MCP3428_W_REG(uint8_t SlaveAdr, uint8_t RegVal)
 
 /**
  * \fn uint16_t MCP3428_R_DATA(uint8_t SlaveAdr)
- * \brief fonction qui permet de lire la valeur ADC 
- * \return un entier 16 bit
+ * @brief Lit une valeur 16 bits depuis le MCP3428 via I2C.
+ * @param SlaveAdr Adresse I2C du MCP3428.
+ * @return Valeur ADC lue (16 bits).
  */
 uint16_t MCP3428_R_DATA(uint8_t SlaveAdr)
 {
