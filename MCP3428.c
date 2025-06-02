@@ -143,6 +143,10 @@ uint16_t MCP3428_R_DATA(uint8_t SlaveAdr)
     
     I2C_Write((SlaveAdr << 1));
     
+    I2C_Restart();
+    I2C_Write(((SlaveAdr << 1)|0x01));
+
+
     val[0] = I2C_Read();
     I2C_ACK();
     
